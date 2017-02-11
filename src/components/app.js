@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import YTSearch  from 'youtube-api-search';
 import SearchBar from './search_bar';
 import VideoPlayer from './video_player';
@@ -23,9 +24,11 @@ class App extends Component {
   }
 
   render() {
+    const Searchbounce = _.debounce((text) => this.SearchOnYoutube(text),150);
+
     return (
       <div>
-        <SearchBar onTextChange={(text) => this.SearchOnYoutube(text)}/>
+        <SearchBar onTextChange={Searchbounce}/>
 
         <VideoPlayer video={this.state.selectedvideo}/>
 
